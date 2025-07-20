@@ -1,0 +1,17 @@
+--Countries with the highest number of orders
+SELECT ShipCountry, count(OrderID) FROM Orders
+GROUP by ShipCountry
+ORDER by count(OrderID) DESC;
+--Orders from the USA ordered by date of order from the newest
+SELECT ShipCountry, OrderDate FROM Orders
+WHERE ShipCountry = 'USA'
+ORDER by OrderDate DESC
+--sum of sales for the USA
+SELECT ShipCountry, sum(Subtotal) FROM Orders as O
+JOIN 'Order Subtotals' as OS on O.OrderID = OS.OrderID
+GROUP by ShipCountry
+HAVING ShipCountry = 'USA';
+--number of unique customers for each country
+SELECT ShipCountry, count(distinct customerID) as Total FROM Orders
+GROUP by ShipCountry
+ORDER by Total DESC;
